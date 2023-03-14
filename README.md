@@ -88,3 +88,13 @@ Project follows the network architecture described in the related papers 7.Appen
 
 The images show results after training the network through 10 epochs. As
 we can see, the results are rather interesting. Future work will look more into the data preprocessing/transformations and selected parameters. 
+
+
+![alt text](https://github.com/farup/CycleGAN/blob/8cc4e9c8721b07bc9cf7820567e8f8b7a21c2218/results/horse_0.png)
+
+![alt text](https://github.com/farup/CycleGAN/blob/8cc4e9c8721b07bc9cf7820567e8f8b7a21c2218/results/zebraFake_0.png)
+
+![alt text](https://github.com/farup/CycleGAN/blob/8cc4e9c8721b07bc9cf7820567e8f8b7a21c2218/results/horse_01.png)
+
+![alt text](https://github.com/farup/CycleGAN/blob/8cc4e9c8721b07bc9cf7820567e8f8b7a21c2218/results/zebraFake_01.png)
+
