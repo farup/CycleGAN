@@ -17,6 +17,10 @@ This a implementation of the paper ”Unpaired Imageto-Image Translation using C
 
 The goal Is to learn a “translation” G: X -> Y and F: Y -> X given two unordered image collections X and Y, in the absence of paired examples. In this case the purpose is to “translate” images how horses (X) to images of zebras (Y), and vice versa.This is done by playing an adversial game between generators and discriminators.  The goal of the generators, G, is to produce samples from a distribution, while the discriminators aim to figure out if the sample is from an actual distribution (real) or generated (fake). More precisely, we want to optimize adversarial- and cycle consistency loss. 
 
+<a href="https://arxiv.org/pdf/1703.10593v7.pdf">Link to paper</a>
+
+<a href="https://www.kaggle.com/datasets/suyashdamle/cyclegan">Link to datasets</a>
+
 ## Theory 
 
 ### CNN – Brief Recap 
