@@ -38,7 +38,15 @@ p(x) = ∫p(x,z)dz =∫p(x|z)p(z)dz
 
 To obtain p(x) we need to marginalize of the latent variables. 
 
-In most cases the equation above does not have an analytical solution, and we in deeplearning models we will approximate the likelihood distribution  p(x|z) with a neural network. 
+In most cases the equation above does not have an analytical solution, and we in deeplearning models we will approximate the likelihood distribution  p(x|z) with a neural network.
+
+### Generative Adversarial Network - GANs
+Where Variational Autoencoders VAE tries to model the encoded latent vector in a probabilistic matter, p(z|x), GANs give up on this. Instead, it sample from a gaussian distributed z space, and a following adversarial process in which two models “players” are trained simultaneously, also referred to as wo player game. The two players; 
+
+-	The generator G that learns to generate plausible data from the gaussian distributed noise.
+-	The discriminator D that learns to distinguish the generator’s fake data from real data. 
+
+$$min_Gmax_D V(G,D) = E_{x \sim p_{data}} [ln(D(x))] + E_{z \sim p_{z}}[ln(1-D(G(z))]$$
 
 ### CycleGANs 
 
@@ -48,12 +56,21 @@ As we know from previously, CycleGAN wants to learn the two mappings G : X− > 
 
 For the mapping function G and its discriminator Dy the objective is:
 
+$$L_{GAN}(G,D_y, X,Y) = E_{y\sim p_{data(y)}} [ln(D_y(y))] + E_{x \sim p_{data(x)}}[ln(1-D(G(x))]$$
 
 where G tries to generate images G(x) that look like images from domain Y, while Dy aims to distinguish between G(x) and real samples y. Dy tries to maximise this objective as it wants to Dy(y) to output 1 (real) and Dy(G(x)) output 0 (fake). The adversary G aims the to minimize this objective. Similar adversarial loss for the mapping F and discriminator Dx
 
 ### Cycle Consistency Loss
 
 With large enough capacity, a network can map the same set of input images to any random style of the images in the target domain. Thus adversarial losses alone cannot guarantee that the learned function can map an individual input xi to a desired output yi. As previously mentioned, cycle consistency is therefore implemented
+
+$$ x -> G(x) -> F(G(x)) \sim x$$
+
+Cycle consistency 
+
+$$L_{cyc}(G,F) = E_{x\sim p_{data(x)}} [|| F(G(X)) - X||_1] + E_{y \sim p_{data(y)}}[G(F(y)) - y||_1]$$
+
+Cycle consistency loss.
 
 ## Project Implementation 
 
@@ -64,3 +81,6 @@ Dataset in this project is ”horse2zebra”. The dataset consist of 256 x 256 p
 Project follows the network architecture described in the related papers 7.Appendix. The blocks are implemented in terms of functions returning nn.Sequential(), with goal of reusable and easy modifications. Discriminator and Generator are implemented as two separate classes. The dataset class ”HorseZebraDataset” loads the dataset from a under a folder ’/dataset/’ uploaded on google drive. Due to few parameters details in the architecture descriptions, I adjusted strides and padding, such that the tensors feature maps to matched. The number of channels are according to the architecture description. Paper suggest to replaces the negative log likelihood objective (loss function) by the least-squares loss, due to more stable loss. Adam solver is used as optimizer, with batch size of 1. The discriminators and generators are trained simultaneously. Scaling of gradients are also performed, so they aren’t flushed to zero.
 
 ## Results 
+
+The images show results after training the network through 10 epochs. As
+we can see, the results are rather interesting. Future work will look more into the data preprocessing/transformations and selected parameters. 
